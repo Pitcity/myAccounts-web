@@ -18,12 +18,12 @@ public class Main {
             Account e2=new Account("dffds",BigDecimal.valueOf(1010),"ddd");
             Account e3=new Account("dffds");
 
-            Deal d1 = Deal.createDeal(e1,e2,"ddf",BigDecimal.valueOf(550),"data1");
-            Deal d2 = Deal.createDeal(e1,e2,"ddf",BigDecimal.valueOf(550),"data1");
+            //Deal d1 = Deal.createDeal(e1,e2,"ddf",BigDecimal.valueOf(550),"data1");
+            //Deal d2 = Deal.createDeal(e1,e2,"ddf",BigDecimal.valueOf(550),"data1");
 
 try {
-    session.persist(d1);
-    session.persist(d2);
+    //session.persist(d1);
+    //session.persist(d2);
 
 } catch (Exception e) {
     System.out.println(e.getStackTrace());

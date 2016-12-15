@@ -62,17 +62,6 @@ public class Account {
         return isOuter;
     }
 
-    public boolean depositIsChanged (BigDecimal ammount){
-        if (!isOuter)
-            if (ammount.multiply(BigDecimal.valueOf(-1.0)).compareTo(this.deposit)>0)
-                return false;
-            else {
-                this.deposit = this.deposit.add(ammount);
-                return true;
-            }
-
-        else return true;
-    }
     public boolean equals(Object o) {
         Account account = (Account) o;
         return this.getName().equals(account.getName());

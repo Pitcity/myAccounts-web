@@ -36,9 +36,14 @@ public class AccountController {
     }
 
     @RequestMapping (value = "/addAcc", method = RequestMethod.POST)
-    public void addAcc(AccountDto accDto) {
-        Account acc = new Account(accDto);
-        accountRepo.save(acc);
+    public boolean addAcc(AccountDto accDto) {
+        if(accountRepo.findByName(accDto.getName())!=null) {
+            return false; //TODO:account already exists
+        } else {
+            Account acc = new Account(accDto);
+            accountRepo.save(acc);
+            return true;
+        }
     }
 
     @RequestMapping (value = "/delete{accId}")

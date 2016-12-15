@@ -24,14 +24,7 @@ public class Deal implements Serializable {
     private String note;
     private BigDecimal sum;
 
-    private Deal(Account buyer, Account seller, String[] products, double[] price, int[] ammount, String note, String date) {
-        this.buyer = buyer;
-        this.seller = seller;
-        this.note = note;
-        this.date = date;
-    }
-
-    private Deal(Account buyer, Account seller, String note, BigDecimal sum, String date)  {
+    public Deal(Account buyer, Account seller, String note, BigDecimal sum, String date)  {
         this.buyer = buyer;
         this.seller = seller;
         this.sum = sum;
@@ -39,10 +32,10 @@ public class Deal implements Serializable {
         this.date = date;
     }
 
-    public static Deal createDeal(Account buyer, Account seller, String note, BigDecimal sum, String date) {
+    /*public static Deal createDeal(Account buyer, Account seller, String note, BigDecimal sum, String date) {
         if (buyer.depositIsChanged(sum.multiply(BigDecimal.valueOf(-1)))&& seller.depositIsChanged(sum)) return new Deal(buyer, seller, note, sum, date);
         return null;
-    }
+    }*/
 
     public Deal() {
 
@@ -71,5 +64,9 @@ public class Deal implements Serializable {
 
     public String getNote() {
         return note;
+    }
+
+    public long getId() {
+        return id;
     }
 }
