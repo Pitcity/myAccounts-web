@@ -1,0 +1,9 @@
+com\itovpinets\dto\AccountDto.class
+com\itovpinets\dao\AccountDao.class
+com\itovpinets\dao\DealDao.class
+com\itovpinets\dto\DealDto.class
+com\itovpinets\entity\Account.class
+com\itovpinets\entity\Deal.class
+com\itovpinets\controller\HomeController.class
+com\itovpinets\util\AppConfig.class
+itovpinets\com\Main.class
