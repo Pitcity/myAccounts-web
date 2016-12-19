@@ -3,6 +3,7 @@ package com.itovpinets.entity;
 import com.itovpinets.dto.AccountDto;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
@@ -16,8 +17,11 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
+    @Column(unique = true)
+    @NotNull
     String name;
 
+    @NotNull
     BigDecimal deposit;
 
     String description;

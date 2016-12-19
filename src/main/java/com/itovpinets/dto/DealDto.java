@@ -1,5 +1,7 @@
 package com.itovpinets.dto;
 
+import com.itovpinets.entity.Deal;
+
 import java.math.BigDecimal;
 
 /**
@@ -12,6 +14,25 @@ public class DealDto {
     private String seller;
     private String date;
     private String note;
+
+    public DealDto(long id, String buyer, String seller, String date, String note, BigDecimal sum) {
+        this.id = id;
+        this.buyer = buyer;
+        this.seller = seller;
+        this.date = date;
+        this.note = note;
+        this.sum = sum;
+    }
+
+    public DealDto(Deal deal) {
+        this.id = deal.getId();
+        this.buyer = deal.getBuyer().toString();
+        this.seller = deal.getSeller().toString();
+        this.date = deal.getDate();
+        this.note = deal.getNote();
+        this.sum = deal.getSum();
+    }
+
     private BigDecimal sum;
 
     public long getId() {

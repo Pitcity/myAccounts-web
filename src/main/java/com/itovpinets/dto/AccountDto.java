@@ -1,11 +1,16 @@
 package com.itovpinets.dto;
 
+import com.itovpinets.entity.Account;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by IhorTovpinets on 15.12.2016.
  */
-public class AccountDto {
+public class AccountDto implements Serializable {
     Long id;
 
     String name;
@@ -55,5 +60,25 @@ public class AccountDto {
 
     public boolean isOuter() {
         return isOuter;
+    }
+
+    public AccountDto() {
+
+    }
+
+    public AccountDto(AccountDto newBookingDto) {
+        this.id = newBookingDto.id;
+        this.name = newBookingDto.getName();
+        this.deposit = newBookingDto.getDeposit();
+        this.description = newBookingDto.getDescription();
+        this.isOuter = newBookingDto.isOuter();
+    }
+
+    public AccountDto(Account account) {
+        this.id = account.getId();
+        this.name = account.getName();
+        this.deposit = account.getDeposit();
+        this.description = account.getDescription();
+        this.isOuter = account.isOuter();
     }
 }

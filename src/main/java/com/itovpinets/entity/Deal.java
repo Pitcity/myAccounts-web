@@ -24,7 +24,7 @@ public class Deal implements Serializable {
     private String note;
     private BigDecimal sum;
 
-    public Deal(Account buyer, Account seller, String note, BigDecimal sum, String date)  {
+    public Deal(Account buyer, Account seller, String note, BigDecimal sum, String date) {
         this.buyer = buyer;
         this.seller = seller;
         this.sum = sum;
@@ -43,12 +43,14 @@ public class Deal implements Serializable {
 
     private double countSumDeal(double[] price, int[] ammount) {
         double sum = 0;
-        for (int i=0;i<price.length;i++)
-            sum +=price[i]*ammount[i];
+        for (int i = 0; i < price.length; i++)
+            sum += price[i] * ammount[i];
         return sum;
     }
 
-    public String getDate() {return date;}
+    public String getDate() {
+        return date;
+    }
 
     public Account getBuyer() {
         return buyer;

@@ -4,6 +4,7 @@ import com.itovpinets.dto.DealDto;
 import com.itovpinets.entity.Account;
 import com.itovpinets.entity.Deal;
 import com.itovpinets.repository.AccountRepo;
+import com.itovpinets.repository.DealRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,12 @@ import java.math.BigDecimal;
  */
 @Service
 public class DealService {
+/*
+    @Autowired
+    public AccountRepo accountRepo;
 
     @Autowired
-    AccountRepo accountRepo;
+    public DealRepo dealRepo;
 
     @Autowired
     AccountService accountService;
@@ -39,5 +43,6 @@ public class DealService {
         dealDto.setNote(deal.getNote());
 
         return dealDto;
-    }
+    }*/
+    //todo      List<Deal> findBySellerOrBuyer(Account account);
 }
