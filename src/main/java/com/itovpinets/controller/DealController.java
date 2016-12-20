@@ -1,13 +1,24 @@
 package com.itovpinets.controller;
 
+import com.google.gson.Gson;
+import com.itovpinets.dto.AccountDto;
+import com.itovpinets.dto.DealDto;
 import com.itovpinets.entity.Account;
+import com.itovpinets.entity.Deal;
 import com.itovpinets.repository.AccountRepo;
 import com.itovpinets.repository.DealRepo;
+import com.itovpinets.service.AccountService;
+import com.itovpinets.service.DealService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
 
@@ -18,25 +29,17 @@ import java.math.BigDecimal;
 @Controller
 public class DealController {
 
-   /* @Autowired
+    @Autowired
     private DealRepo dealRepo;
 
     @Autowired
-    private AccountRepo accountRepo;*/
+    private AccountRepo accountRepo;
 
-   /* @Autowired
+    @Autowired
     DealService dealService;
 
     @Autowired
     AccountService accountService;
-*/
-   /* @RequestMapping (value = "/",method = RequestMethod.GET)
-    public String printWelcome(ModelMap model) {
-        accountRepo.save(new Account("Ihor", BigDecimal.valueOf(1000), "ihor's account"));
-        model.addAttribute("message", "Spring 3 MVC Hello World");
-        return "index";
-
-    }*/
 
     /*@RequestMapping (value = "/",method = RequestMethod.GET)
     public List<DealDto> listOfDealsForAcc(Account account) {
@@ -46,20 +49,23 @@ public class DealController {
             //listDealDto.add(dealService.getDto(deal));
 
         return listDealDto;
-    }
-    @RequestMapping (value = "/addDeal",method = RequestMethod.POST)
-    public boolean addDeal(DealDto dealDto) {
+    }*/
+
+    @RequestMapping (value = "addDeal",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> addDeal(@RequestBody DealDto dealDto) {
         Deal newDeal = dealService.createDeal(dealDto);
         if (newDeal!=null) {
-            dealService.dealRepo.save(newDeal);
-            return true;
+            dealRepo.save(newDeal);
+            return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(newDeal)); //TODO:what does it means ok?
         } else
-            return false;       //TODO:not enough money on acc
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("not enough money on buyer's acc");
+        //TODO:not enough money on acc
     }
 
-    @RequestMapping (value = "/deleteDeal{dealId}")
+    /*@RequestMapping (value = "/deleteDeal{dealId}")
     public void deleteAcc(Long dealId) {
         dealService.dealRepo.delete(dealService.dealRepo.findOne(dealId));
-    }
-*/
+    }*/
+
 }

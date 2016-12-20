@@ -15,7 +15,7 @@ import java.math.BigDecimal;
  */
 @Service
 public class DealService {
-/*
+
     @Autowired
     public AccountRepo accountRepo;
 
@@ -28,8 +28,12 @@ public class DealService {
     public Deal createDeal(DealDto dealDto) {
         Account seller = accountRepo.findByName(dealDto.getSeller());
         Account buyer = accountRepo.findByName(dealDto.getBuyer());
-        if (accountService.depositIsChanged(buyer,dealDto.getSum().multiply(BigDecimal.valueOf(-1)))&& accountService.depositIsChanged(seller,dealDto.getSum()))
+        if (accountService.depositIsChanged(buyer,dealDto.getSum().multiply(BigDecimal.valueOf(-1))) &&
+                accountService.depositIsChanged(seller,dealDto.getSum())) {
+            seller = accountRepo.findByName(dealDto.getSeller());
+            buyer = accountRepo.findByName(dealDto.getBuyer());
             return new Deal(buyer, seller, dealDto.getNote(), dealDto.getSum(), dealDto.getDate());
+        }
         return null;
     }
 
@@ -43,6 +47,6 @@ public class DealService {
         dealDto.setNote(deal.getNote());
 
         return dealDto;
-    }*/
+    }
     //todo      List<Deal> findBySellerOrBuyer(Account account);
 }

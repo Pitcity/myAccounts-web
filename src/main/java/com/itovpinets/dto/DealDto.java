@@ -14,6 +14,7 @@ public class DealDto {
     private String seller;
     private String date;
     private String note;
+    private BigDecimal sum;
 
     public DealDto(long id, String buyer, String seller, String date, String note, BigDecimal sum) {
         this.id = id;
@@ -24,6 +25,10 @@ public class DealDto {
         this.sum = sum;
     }
 
+    public DealDto() {
+
+    }
+
     public DealDto(Deal deal) {
         this.id = deal.getId();
         this.buyer = deal.getBuyer().toString();
@@ -32,8 +37,6 @@ public class DealDto {
         this.note = deal.getNote();
         this.sum = deal.getSum();
     }
-
-    private BigDecimal sum;
 
     public long getId() {
         return id;

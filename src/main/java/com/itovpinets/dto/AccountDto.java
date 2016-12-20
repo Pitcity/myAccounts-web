@@ -4,22 +4,20 @@ import com.itovpinets.entity.Account;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 /**
  * Created by IhorTovpinets on 15.12.2016.
  */
 public class AccountDto implements Serializable {
-    Long id;
+    private Long id;
 
-    String name;
+    private String name;
 
-    BigDecimal deposit;
+    private BigDecimal deposit;
 
-    String description;
+    private String description;
 
-    boolean isOuter;
+    private boolean isOuter;
 
     public void setId(Long id) {
         this.id = id;
@@ -67,18 +65,18 @@ public class AccountDto implements Serializable {
     }
 
     public AccountDto(AccountDto newBookingDto) {
-        this.id = newBookingDto.id;
-        this.name = newBookingDto.getName();
-        this.deposit = newBookingDto.getDeposit();
-        this.description = newBookingDto.getDescription();
-        this.isOuter = newBookingDto.isOuter();
+        this.setId(newBookingDto.getId());
+        this.setName(newBookingDto.getName());
+        this.setDeposit(newBookingDto.getDeposit());
+        this.setDescription(newBookingDto.getDescription());
+        this.setOuter(newBookingDto.isOuter());
     }
 
     public AccountDto(Account account) {
-        this.id = account.getId();
-        this.name = account.getName();
-        this.deposit = account.getDeposit();
-        this.description = account.getDescription();
-        this.isOuter = account.isOuter();
+        this.setId(account.getId());
+        this.setName(account.getName());
+        this.setDeposit(account.getDeposit());
+        this.setDescription(account.getDescription());
+        this.setOuter(account.isOuter());
     }
 }

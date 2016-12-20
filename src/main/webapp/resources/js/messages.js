@@ -12,4 +12,4 @@ messages = {
         regexDescription: 'Please don\'t use special symbols',
         maxDescription: 'Enter no more then 50 symbols'
     }
-}
+};

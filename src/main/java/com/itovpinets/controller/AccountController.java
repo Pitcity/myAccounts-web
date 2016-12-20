@@ -34,7 +34,7 @@ public class AccountController {
 
     @RequestMapping(value = "addAcc", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<String> getBooking(@RequestBody AccountDto accDto, BindingResult bindingResult) {
+    public ResponseEntity<String> addAccount(@RequestBody AccountDto accDto, BindingResult bindingResult) {
         if (!(accountService.findByName(accDto.getName()) == null)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Account already exsists");
         }
@@ -57,7 +57,6 @@ public class AccountController {
 
     @RequestMapping(value = "updateAcc", method = RequestMethod.POST)
     public ResponseEntity<String> updateAcc(@RequestBody AccountDto accDto, BindingResult bindingResult) {
-        //todo: check if there's no other acc with this name
         try {
             accountRepo.updateAccount(accDto.getId(), accDto.getName(), accDto.getDescription());
         } catch (PersistenceException e) {

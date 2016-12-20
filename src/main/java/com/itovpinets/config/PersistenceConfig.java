@@ -55,6 +55,7 @@ public class PersistenceConfig {
         factory.afterPropertiesSet();
 
         return factory.getObject();
+
     }
 
     @Bean

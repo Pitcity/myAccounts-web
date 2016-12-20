@@ -12,28 +12,4 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 
 public abstract class AccountDao {
-        @Autowired
-        SessionFactory sessionFactory;
-
-        protected Session getCurrentSession(){
-            return sessionFactory.getCurrentSession();
-        }
-
-
-
-    public static int addAcc(Account u) {
-        int i=0;
-        Session session=new Configuration().
-                configure().buildSessionFactory().openSession();
-
-        Transaction t=session.beginTransaction();
-        t.begin();
-
-        i=(Integer)session.save(u);
-
-        t.commit();
-        session.close();
-
-        return i;
-    }
 }

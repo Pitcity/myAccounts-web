@@ -25,17 +25,18 @@ public class AccountService {
     AccountRepo accountRepo;
 
     public boolean depositIsChanged(Account acc, BigDecimal ammount) {
+        boolean resultOfOperation;
         if (!acc.isOuter())
             if (ammount.multiply(BigDecimal.valueOf(-1.0)).compareTo(acc.getDeposit()) > 0)
-                return false;
+                resultOfOperation =  false;
             else {
-                accountRepo.delete(acc);
-                Account accForUpdate = new Account(acc.getName(), acc.getDeposit().add(ammount), acc.getDescription());
-                accountRepo.save(accForUpdate);
-                return true;
+                //todo:function for adding money to Acc inst and try to save it
+                accountRepo.updateAccountWithDeposit(acc.getId(), acc.getName(),acc.getDescription(),acc.getDeposit().add(ammount));
+                resultOfOperation =  true;
             }
-
-        else return true;
+        else
+            resultOfOperation = true;
+        return resultOfOperation;
     }
 
     public Account findByName(String name) {
@@ -55,14 +56,5 @@ public class AccountService {
         return listOfAccsDto;
     }
 
-    public boolean accountIsAdded(AccountDto accDto) {
-        if (!(findByName(accDto.getName()) == null)) {
-            return false;
-        }
-        //todo: if (accountValidator.validateAccount(accDto));
-        Account acc = new Account(accDto);
-        accountRepo.save(acc);
-        return true;
-    }
 
 }
