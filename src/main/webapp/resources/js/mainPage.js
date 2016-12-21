@@ -27,6 +27,10 @@ $('#hideDealDialog').click(function () {
     $('#dialogForAdditingDeal').hide();
 });
 
+$('#closeDealsForAcc').click(function () {
+    $('#dialogForDealsFroAcc').hide();
+});
+
 $('#hideDialog').click(function () {
     $('#dialogForAditingAccount').hide();
 });
@@ -48,14 +52,14 @@ function checkSelected() {
 
     $('#addDealSeller option').prop('disabled', false);
     $('#addDealBuyer option').prop('disabled', false);
-    $('#addDealBuyer option[value='+accSellerNameId+']').prop('disabled',true);
-    $('#addDealSeller option[value='+accBuyerNameId+']').prop('disabled',true);
+    $('#addDealBuyer option[value=' + accSellerNameId + ']').prop('disabled', true);
+    $('#addDealSeller option[value=' + accBuyerNameId + ']').prop('disabled', true);
 
-    if (accSellerNameId=='another')
+    if (accSellerNameId == 'another')
         ($('#inputAddDealSeller').show());
     else
         ($('#inputAddDealSeller').hide());
-    if (accBuyerNameId=='another')
+    if (accBuyerNameId == 'another')
         ($('#inputAddDealBuyer').show());
     else
         ($('#inputAddDealBuyer').hide());
@@ -63,17 +67,17 @@ function checkSelected() {
     //$('#addDealBuyer')
 }
 
-function populateAccountOptions(allInnerAccounts){
+function populateAccountOptions(allInnerAccounts) {
     var content = '';
     allInnerAccounts.forEach(function (item, i) {
-        content += '<option class="list-group-item-success" value="' + item.id + '">'+ item.name + '</option>';
+        content += '<option class="list-group-item-success" value="' + item.id + '">' + item.name + '</option>';
     });
     content += '<option class="list-group-item-danger" value="another">another</option>';
     $('#addDealSeller').html('');
     $('#addDealSeller').append(content);
     $('#addDealBuyer').html('');
     $('#addDealBuyer').append(content);
-    $('#addDealBuyer option[value="another"]').prop('selected',true);
+    $('#addDealBuyer option[value="another"]').prop('selected', true);
     checkSelected();
 }
 
@@ -125,13 +129,31 @@ function getDataForEditingAcc(id) {
     });
 }
 
+function getDealsForAcc(id) {
+    var path = "dealsFroAcc_" + id;
+    $.ajax({
+        type: 'get',
+        contentType: 'application/json',
+        url: path,
+        dataType: 'json',
+        success: function (data) {
+            var dealsForAcc = jsonToDealList(data);
+            populateDealList(dealsForAcc);
+            $('#dialogForDealsFroAcc').show();
+        },
+        error: function (xhr) {
+            showErrorDialog(xhr.body);
+        }
+    });
+}
+
 function updateAccount() {
-    var acc = new AccountForUpdate($('#accEditId').val(), $('#accAddName').val(), $('#accAddDeposit').val(), $('#accAddDescription').val(), true);
+    var acc = new AccountForUpdate($('#accEditId').val(), $('#accAddName').val(), $('#accAddDeposit').val(), $('#accAddDescription').val(), false);
     sendAccountToServerForUpdate(acc);
 }
 
 function createAccount() {
-    var acc = new Account($('#accAddName').val(), $('#accAddDeposit').val(), $('#accAddDescription').val(), true);
+    var acc = new Account($('#accAddName').val(), $('#accAddDeposit').val(), $('#accAddDescription').val(), false);
     sendAccountToServerForCreate(acc);
 }
 
@@ -141,8 +163,13 @@ function createDeal() {
     $('#inputAccountsError').hide();
 
     var seller, buyer, note, sum, date;
-    seller = (accSellerNameId == 'another') ? $('#inputAddDealSeller').val() : $('#addDealSeller').find('option[value=' + accSellerNameId + ']').html();
-    buyer = (accBuyerNameId == 'another') ? $('#inputAddDealBuyer').val() : $('#addDealBuyer').find('option[value=' + accBuyerNameId + ']').html();
+
+    seller = accSellerNameId == 'another' ? $('#inputAddDealSeller').val() :
+        $('#addDealSeller').find('option[value=' + accSellerNameId + ']').html();
+
+    buyer = accBuyerNameId == 'another' ? $('#inputAddDealBuyer').val() :
+        $('#addDealBuyer').find('option[value=' + accBuyerNameId + ']').html();
+
     sum = $('#addDealSum').val();
     note = $('#addDealNote').val();
     date = $('#addDealDate').val();
@@ -205,6 +232,22 @@ function jsonToAccArray(data) {
     return innerAccList;
 }
 
+function jsonToDealList(data) {
+    var innerDealList = [];
+    data.forEach(function (item, i) {
+        var newDeal = {
+            id: item.id,
+            seller: item.seller,
+            buyer: item.buyer,
+            date: item.date,
+            note: item.note,
+            sum: item.sum
+        };
+        innerDealList[i] = newDeal;
+    });
+    return innerDealList;
+}
+
 function showAccountList() {
     var allInnerAccounts = [];
     $.ajax({
@@ -217,7 +260,7 @@ function showAccountList() {
             populateAccountList(allInnerAccounts);
             $('#dialogForAditingAccount').hide();
         },
-        error: function (xhrv) {
+        error: function (xhr) {
             showErrorDialog(xhr.responseText);
         }
     });
@@ -254,6 +297,7 @@ function AccountForUpdate(id, name, deposit, description, isOuter) {
 function sendAccountToServerForCreate(acc) {
     var operationResult;
     var allInnerAccounts = [];
+    alert(acc.isOuter);
     $.ajax({
         type: 'post',
         contentType: 'application/json',
@@ -281,25 +325,43 @@ function showErrorDialog(text) {
     });
     $('#dialogForServerErrors').show();
 }
+
+function populateDealList(dealsForAccount, account) {
+
+    //$('#dealsForAccountName').append(account);
+    $('#tableWithDealsForAccount_wrapper').remove();
+
+    var contentForTable = '';
+    dealsForAccount.forEach(function (item, i) {
+        contentForTable += '<tr id=\'dealId_' + item.id + '\'><td>' + (i + 1) + '</td><td hidden>' + item.id + '</td><td>'
+            + item.seller + '</td><td>' + item.buyer + '</td><td>' + item.sum +
+            '</td><td>' + item.date + '</td><td>' + item.note + '</td></tr>';//todo:check this
+    });
+    var table = '<table id="tableWithDealsForAccount" class="table table-striped"><thead><th>id</th><th hidden>id</th>' +
+        '<th>Seller</th><th>Buyer</th><th>Sum</th><th>Date</th><th>Note</th></thead><tbody>' + contentForTable + '</tbody></table>';
+    $('#divForTableWithDeals').append(table);
+    $('#tableWithDealsForAccount').DataTable();
+
+}
 function populateAccountList(allInnerAccounts) {
     $('#tableWithAccs_wrapper').remove();
 
     var contentForTable = '';
     allInnerAccounts.forEach(function (item, i) {
         contentForTable += '<tr id=\'accountId_' + item.id + '\'><td>' + (i + 1) + '</td><td hidden>' + item.id + '</td><td>' + item.name + '</td><td>' + item.deposit +
-            '</td><td>' + item.description + '</td><td id="tatata">';
-        contentForTable += ' <button id =\'editAcc_' + item.id + '\' class="btn btn-primary btn-xs editAcc" ' +
+            '</td><td>' + item.description + '</td><td>';
+        contentForTable += '<button id =\'editAcc_' + item.id + '\' class="btn btn-primary btn-xs editAcc" ' +
             'data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>';
-        contentForTable += ' <button id =\'deleteAcc_' + item.id + '\' class="btn btn-danger btn-xs deleteAcc" ' +
+        contentForTable += '<button id =\'deleteAcc_' + item.id + '\' class="btn btn-danger btn-xs deleteAcc" ' +
             'data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button>';
+        contentForTable += '<button id =\'dealsForAcc_' + item.id + '\' class="btn btn-info btn-xs dealsForAcc" ' +
+            'data-title="Additional" data-toggle="modal" data-target="#info" ><span class="glyphicon glyphicon-duplicate"></span></button>';
     });
-
     var table = '<table id="tableWithAccs" class="table table-striped"><thead><th>id</th><th hidden>id</th>' +
         '<th>Name</th><th>Deposit</th><th>Description</th><th>Options</th></thead><tbody>' + contentForTable + '</tbody></table>';
+
     $('#divForTableWithAccs').append(table);
 
-
-    $('#tableWithAccs').DataTable();
     $('.deleteAcc').click(function () {
         var res = this.id.substring(10, 20);
         deleteAcc(res);
@@ -310,6 +372,12 @@ function populateAccountList(allInnerAccounts) {
         getDataForEditingAcc(res);
     });
 
+    $('.dealsForAcc').click(function () {
+        var res = this.id.substring(12, 20);
+        getDealsForAcc(res);
+    });
+
+    $('#tableWithAccs').DataTable();
     populateAccountOptions(allInnerAccounts);
 }
 

@@ -35,7 +35,7 @@ public class AccountDto implements Serializable {
         this.description = description;
     }
 
-    public void setOuter(boolean outer) {
+    public void setIsOuter(boolean outer) {
         isOuter = outer;
     }
 
@@ -56,7 +56,7 @@ public class AccountDto implements Serializable {
         return description;
     }
 
-    public boolean isOuter() {
+    public boolean getIsOuter() {
         return isOuter;
     }
 
@@ -69,7 +69,7 @@ public class AccountDto implements Serializable {
         this.setName(newBookingDto.getName());
         this.setDeposit(newBookingDto.getDeposit());
         this.setDescription(newBookingDto.getDescription());
-        this.setOuter(newBookingDto.isOuter());
+        this.setIsOuter(newBookingDto.getIsOuter());
     }
 
     public AccountDto(Account account) {
@@ -77,6 +77,6 @@ public class AccountDto implements Serializable {
         this.setName(account.getName());
         this.setDeposit(account.getDeposit());
         this.setDescription(account.getDescription());
-        this.setOuter(account.isOuter());
+        this.setIsOuter(account.getIsOuter());
     }
 }

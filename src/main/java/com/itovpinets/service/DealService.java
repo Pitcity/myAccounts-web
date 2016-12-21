@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by IhorTovpinets on 15.12.2016.
@@ -28,8 +30,17 @@ public class DealService {
     public Deal createDeal(DealDto dealDto) {
         Account seller = accountRepo.findByName(dealDto.getSeller());
         Account buyer = accountRepo.findByName(dealDto.getBuyer());
-        if (accountService.depositIsChanged(buyer,dealDto.getSum().multiply(BigDecimal.valueOf(-1))) &&
-                accountService.depositIsChanged(seller,dealDto.getSum())) {
+        if (seller == null) {
+            accountRepo.save(new Account(dealDto.getSeller()));
+            seller = accountRepo.findByName(dealDto.getSeller());
+        }
+        if (buyer == null) {
+            accountRepo.save(new Account(dealDto.getBuyer()));
+            buyer = accountRepo.findByName(dealDto.getBuyer());
+        }
+
+        if (accountService.depositIsChanged(buyer, dealDto.getSum().multiply(BigDecimal.valueOf(-1))) &&
+                accountService.depositIsChanged(seller, dealDto.getSum())) {
             seller = accountRepo.findByName(dealDto.getSeller());
             buyer = accountRepo.findByName(dealDto.getBuyer());
             return new Deal(buyer, seller, dealDto.getNote(), dealDto.getSum(), dealDto.getDate());
@@ -48,5 +59,34 @@ public class DealService {
 
         return dealDto;
     }
-    //todo      List<Deal> findBySellerOrBuyer(Account account);
+
+    public List<DealDto> getDtoList(List<Deal> listOfDeals) {
+        List<DealDto> listOfDealsDto = new LinkedList<DealDto>();
+        for (Deal d : listOfDeals) {
+            listOfDealsDto.add(new DealDto(d));
+        }
+        return listOfDealsDto;
+    }
+
+    public List<DealDto> getDealsForAccount(Account account) {
+        List<Deal> dealList = dealRepo.findAll();
+        List<DealDto> dealListDto = new LinkedList<>();
+        for (Deal d : dealList) {
+            if (d.getBuyer().equals(account) || d.getSeller().equals(account)) {
+                dealListDto.add(new DealDto(d));
+            }
+        }
+        return dealListDto;
+    }
+
+    public void updateDeals(Account accountToDelete) {
+        accountRepo.changeOuter(accountToDelete.getId(), true);
+        List<Deal> dealList = dealRepo.findAll();
+        for (Deal d : dealList) {
+            if (d.getBuyer().getIsOuter() && d.getSeller().getIsOuter()) {
+                dealRepo.delete(d);
+            }
+        }
+        accountService.updateOuterAccs();
+    }
 }

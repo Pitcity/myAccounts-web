@@ -26,33 +26,35 @@ public class Account {
 
     private String description;
 
-    private boolean isOuter;
+    private Boolean isOuter;
 
     public Account(String name, BigDecimal deposit, String description) {
         this.setName(name);
         this.setDeposit(deposit);
         this.setDescription(description);
-        this.setOuter(false);
+        this.setIsOuter(false);
     }
 
     public Account(Long id, String name, BigDecimal deposit, String description) {
         this.setName(name);
         this.setDeposit(deposit);
         this.setDescription(description);
-        this.setOuter(false);
+        this.setIsOuter(false);
         this.setId(id);
     }
 
     public Account(String name) {
         this.setName(name);
-        this.setOuter(true);
+        this.setDeposit(new BigDecimal(0));
+        this.setDescription("");
+        this.setIsOuter(true);
     }
 
     public Account(AccountDto accDto) {
         this.setDeposit(accDto.getDeposit());
         this.setName(accDto.getName());
         this.setDescription(accDto.getDescription());
-        this.setOuter(accDto.isOuter());
+        this.setIsOuter(accDto.getIsOuter());
     }
 
     public Account() {
@@ -70,7 +72,7 @@ public class Account {
         return description;
     }
 
-    public boolean isOuter() {
+    public boolean getIsOuter() {
         return isOuter;
     }
 
@@ -99,7 +101,7 @@ public class Account {
         this.description = description;
     }
 
-    public void setOuter(boolean outer) {
-        isOuter = outer;
+    public void setIsOuter(boolean outer) {
+        this.isOuter = outer;
     }
 }

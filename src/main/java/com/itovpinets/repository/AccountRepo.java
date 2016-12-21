@@ -5,6 +5,7 @@ package com.itovpinets.repository;
  */
 
 import com.itovpinets.entity.Account;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -25,6 +26,10 @@ public interface AccountRepo extends JpaRepository<Account, Long> {
 
     @Query("SELECT a FROM Account a WHERE a.name=:name")
     Account findByName(@Param("name") String name) throws ConstraintViolationException;
+
+    @Modifying
+    @Query("UPDATE Account a SET a.isOuter=:isOuter WHERE a.id=:id")
+    void changeOuter(@Param("id") Long id, @Param("isOuter") boolean isOuter) throws ConstraintViolationException;
 
     @Modifying
     @Query("UPDATE Account a SET a.name=:name, a.description = :description, a.deposit = :deposit WHERE a.id=:id")

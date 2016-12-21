@@ -5,6 +5,8 @@ import com.itovpinets.dto.AccountDto;
 import com.itovpinets.entity.Account;
 import com.itovpinets.repository.AccountRepo;
 import com.itovpinets.service.AccountService;
+import com.itovpinets.service.DealService;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,9 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
+    @Autowired
+    DealService dealService;
+
     @RequestMapping(value = "/")
     public String home() {
         System.out.println("Controller: Passing address..");
@@ -35,19 +40,23 @@ public class AccountController {
     @RequestMapping(value = "addAcc", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> addAccount(@RequestBody AccountDto accDto, BindingResult bindingResult) {
+        System.out.println(accDto.getIsOuter() + "\n\n\n\n\n\n\n ");
         if (!(accountService.findByName(accDto.getName()) == null)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Account already exsists");
         }
         //todo: if (accountValidator.validateAccount(accDto));
+        System.out.println(accDto.getIsOuter() + "\n\n\n\n\n\n\n ");
         Account acc = new Account(accDto);
+        System.out.println(acc.getIsOuter() + "\n\n\n\n\n\n\n ");
         accountRepo.save(acc);
-        return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(accountService.getAccDto(accountRepo.findAll())));
+        //// TODO: 21.12.2016 accountRepo.findAllInner returns List
+        return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(accountService.findAllInner()));
     }
 
     @RequestMapping(value = "getAccList", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> listOfAccounts() {
-        return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(accountService.getAccDto(accountRepo.findAll())));
+        return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(accountService.findAllInner()));
     }
 
     @RequestMapping(value = "getEditAcc_{accid}")
@@ -67,7 +76,11 @@ public class AccountController {
 
     @RequestMapping(value = "deleteAcc_{accid}")
     public ResponseEntity<String> deleteAcc(@PathVariable Long accid) {
-        accountRepo.delete(accountRepo.findOne(accid));
+        Account acc = accountRepo.findOne(accid);
+        dealService.updateDeals(acc);
+        if (dealService.getDealsForAccount(acc).isEmpty())
+            accountRepo.delete(accid);
+        //// TODO: 21.12.2016 update deal (delete deals connected to this acc)
         return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(accountService.getAccDto(accountRepo.findAll())));
     }
     /*

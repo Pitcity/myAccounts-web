@@ -2,9 +2,10 @@
  * Created by IhorTovpinets on 17.12.2016.
  */
 
-var ACCOUNT_NAME_REGEX = /^[0-9A-Za-z-'\s]+$/,
-    NOTE_REGEX = /^[a-zA-Zа-яА-ЯЇїІіЄєҐґ0-9\-`´ʼ’'\s]*$/,
-    SUM_REGEX = /^[0-9]+[.,]?[0-9]*$/;
+var ACCOUNT_NAME_REGEX, NOTE_REGEX, SUM_REGEX;
+ACCOUNT_NAME_REGEX = /^[0-9A-Za-z-'\s]+$/;
+NOTE_REGEX = /^[a-zA-Zа-яА-ЯЇїІіЄєҐґ0-9\-`´ʼ’'\s]*$/;
+SUM_REGEX = /^[0-9]+[.,]?[0-9]*$/;
 $(document).ready(function () {
 
     $.validator.addMethod("regexAccountName", function (value, element, regexpr) {
@@ -100,7 +101,6 @@ function validateDealInformation() {
         valid = false;
         $('#addDealNote').parent('div').append('<div class="error">Enter note with max length of 100</div>')
     }
-
     var testedDate = new Date($('#addDealDate').datepicker().val());
     var currentDate = new Date();
     if (testedDate.getTime()>currentDate.getTime()) {

@@ -2,6 +2,7 @@ package com.itovpinets.service;
 
 import com.itovpinets.dto.AccountDto;
 import com.itovpinets.entity.Account;
+import com.itovpinets.entity.Deal;
 import com.itovpinets.repository.AccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,15 +25,18 @@ public class AccountService {
     @Autowired
     AccountRepo accountRepo;
 
+    @Autowired
+    DealService dealService;
+
     public boolean depositIsChanged(Account acc, BigDecimal ammount) {
         boolean resultOfOperation;
-        if (!acc.isOuter())
+        if (!acc.getIsOuter())
             if (ammount.multiply(BigDecimal.valueOf(-1.0)).compareTo(acc.getDeposit()) > 0)
-                resultOfOperation =  false;
+                resultOfOperation = false;
             else {
                 //todo:function for adding money to Acc inst and try to save it
-                accountRepo.updateAccountWithDeposit(acc.getId(), acc.getName(),acc.getDescription(),acc.getDeposit().add(ammount));
-                resultOfOperation =  true;
+                accountRepo.updateAccountWithDeposit(acc.getId(), acc.getName(), acc.getDescription(), acc.getDeposit().add(ammount));
+                resultOfOperation = true;
             }
         else
             resultOfOperation = true;
@@ -57,4 +61,21 @@ public class AccountService {
     }
 
 
+    public List<AccountDto> findAllInner() {
+        List<Account> listAccs = accountRepo.findAll();
+        List<AccountDto> listOfAccsDto = new LinkedList<>();
+        for (Account acc : listAccs) {
+            if (!acc.getIsOuter())
+                listOfAccsDto.add(new AccountDto(acc));
+        }
+        return listOfAccsDto;
+    }
+
+    public void updateOuterAccs() {
+        List<Account> listOfAccs = accountRepo.findAll();
+        for (Account account : listOfAccs) {
+            if (account.getIsOuter() && dealService.getDealsForAccount(account).isEmpty())
+                accountRepo.delete(account);
+        }
+    }
 }

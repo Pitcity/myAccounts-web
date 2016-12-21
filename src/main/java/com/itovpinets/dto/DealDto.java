@@ -31,8 +31,8 @@ public class DealDto {
 
     public DealDto(Deal deal) {
         this.id = deal.getId();
-        this.buyer = deal.getBuyer().toString();
-        this.seller = deal.getSeller().toString();
+        this.buyer = deal.getBuyer().getName();
+        this.seller = deal.getSeller().getName();
         this.date = deal.getDate();
         this.note = deal.getNote();
         this.sum = deal.getSum();

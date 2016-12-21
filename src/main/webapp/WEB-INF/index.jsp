@@ -101,6 +101,22 @@
     </div>
 </div>
 
+<div id="dialogForDealsFroAcc" class="flow modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-title">
+                <div id="dealsForAccountName"></div>
+            </div>
+            <div class="modal-body">
+                <div id="divForTableWithDeals"></div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn" id="closeDealsForAcc" value="Close">
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div id="dialogForServerErrors" class="flow modal">
     <div class="modal-dialog">

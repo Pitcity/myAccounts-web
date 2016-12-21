@@ -32,20 +32,8 @@ public class Deal implements Serializable {
         this.date = date;
     }
 
-    /*public static Deal createDeal(Account buyer, Account seller, String note, BigDecimal sum, String date) {
-        if (buyer.depositIsChanged(sum.multiply(BigDecimal.valueOf(-1)))&& seller.depositIsChanged(sum)) return new Deal(buyer, seller, note, sum, date);
-        return null;
-    }*/
-
     public Deal() {
 
-    }
-
-    private double countSumDeal(double[] price, int[] ammount) {
-        double sum = 0;
-        for (int i = 0; i < price.length; i++)
-            sum += price[i] * ammount[i];
-        return sum;
     }
 
     public String getDate() {
