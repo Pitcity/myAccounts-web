@@ -1,15 +1,15 @@
-D:\myAccounts-web\src\main\java\com\itovpinets\repository\DealRepo.java
-D:\myAccounts-web\src\main\java\com\itovpinets\service\DealService.java
-D:\myAccounts-web\src\main\java\com\itovpinets\dto\AccountDto.java
-D:\myAccounts-web\src\main\java\com\itovpinets\config\WebAppConfig.java
-D:\myAccounts-web\src\main\java\com\itovpinets\entity\Deal.java
-D:\myAccounts-web\src\main\java\com\itovpinets\config\PersistenceConfig.java
-D:\myAccounts-web\src\main\java\com\itovpinets\service\AccountService.java
-D:\myAccounts-web\src\main\java\com\itovpinets\dao\AccountDao.java
-D:\myAccounts-web\src\main\java\com\itovpinets\controller\AccountController.java
-D:\myAccounts-web\src\main\java\com\itovpinets\dao\DealDao.java
-D:\myAccounts-web\src\main\java\com\itovpinets\dto\DealDto.java
-D:\myAccounts-web\src\main\java\com\itovpinets\entity\Account.java
-D:\myAccounts-web\src\main\java\com\itovpinets\config\WebAppInit.java
-D:\myAccounts-web\src\main\java\com\itovpinets\repository\AccountRepo.java
-D:\myAccounts-web\src\main\java\com\itovpinets\controller\DealController.java
+D:\Job SoftServe\myAccounts-web\src\main\java\com\itovpinets\repository\DealRepo.java
+D:\Job SoftServe\myAccounts-web\src\main\java\com\itovpinets\service\AccountService.java
+D:\Job SoftServe\myAccounts-web\src\main\java\com\itovpinets\config\WebAppConfig.java
+D:\Job SoftServe\myAccounts-web\src\main\java\com\itovpinets\dto\DealDto.java
+D:\Job SoftServe\myAccounts-web\src\main\java\com\itovpinets\controller\AccountController.java
+D:\Job SoftServe\myAccounts-web\src\main\java\com\itovpinets\dto\AccountDto.java
+D:\Job SoftServe\myAccounts-web\src\main\java\com\itovpinets\service\DealService.java
+D:\Job SoftServe\myAccounts-web\src\main\java\com\itovpinets\controller\DealController.java
+D:\Job SoftServe\myAccounts-web\src\main\java\com\itovpinets\entity\Account.java
+D:\Job SoftServe\myAccounts-web\src\main\java\com\itovpinets\dao\DealDao.java
+D:\Job SoftServe\myAccounts-web\src\main\java\com\itovpinets\repository\AccountRepo.java
+D:\Job SoftServe\myAccounts-web\src\main\java\com\itovpinets\entity\Deal.java
+D:\Job SoftServe\myAccounts-web\src\main\java\com\itovpinets\config\WebAppInit.java
+D:\Job SoftServe\myAccounts-web\src\main\java\com\itovpinets\config\PersistenceConfig.java
+D:\Job SoftServe\myAccounts-web\src\main\java\com\itovpinets\dao\AccountDao.java

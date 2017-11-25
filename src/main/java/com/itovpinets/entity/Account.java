@@ -29,18 +29,18 @@ public class Account {
     private Boolean isOuter;
 
     public Account(String name, BigDecimal deposit, String description) {
-        this.setName(name);
-        this.setDeposit(deposit);
-        this.setDescription(description);
-        this.setIsOuter(false);
+        this.name = name;
+        this.deposit = deposit;
+        this.description = description;
+        this.isOuter = false;
     }
 
     public Account(Long id, String name, BigDecimal deposit, String description) {
-        this.setName(name);
-        this.setDeposit(deposit);
-        this.setDescription(description);
-        this.setIsOuter(false);
-        this.setId(id);
+        this.name = name;
+        this.deposit = deposit;
+        this.description = description;
+        this.isOuter = false;
+        this.id = id;
     }
 
     public Account(String name) {

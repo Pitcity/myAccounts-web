@@ -66,13 +66,13 @@
                         <label for="addDealSeller">Seller</label>
                         <select onchange="checkSelected()" class="form-control" id="addDealSeller" name="addDealSeller">
                         </select>
-                        <input type="text" hidden id="inputAddDealSeller" placeholder="Enter name for Seller">
+                        <input type="text" hidden id="inputAddDealSeller" class="form-control" placeholder="Enter name for Seller">
                     </div>
                     <div class="form-group">
                         <label for="addDealBuyer">Buyer</label>
                         <select onchange="checkSelected()" class="form-control" id="addDealBuyer" name="addDealBuyer">
                         </select>
-                        <input type="text" hidden id="inputAddDealBuyer" placeholder="Enter name for Buyer">
+                        <input type="text" hidden id="inputAddDealBuyer" class="form-control" placeholder="Enter name for Buyer">
                     </div>
                     <div class="error" hidden id="inputAccountsError">
                         One account cant be buyer and seller in one time

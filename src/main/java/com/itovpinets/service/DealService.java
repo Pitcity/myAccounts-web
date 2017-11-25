@@ -82,11 +82,8 @@ public class DealService {
     public void updateDeals(Account accountToDelete) {
         accountRepo.changeOuter(accountToDelete.getId(), true);
         List<Deal> dealList = dealRepo.findAll();
-        for (Deal d : dealList) {
-            if (d.getBuyer().getIsOuter() && d.getSeller().getIsOuter()) {
+        for (Deal d : dealList)
+            if (d.getBuyer().getIsOuter() && d.getSeller().getIsOuter())
                 dealRepo.delete(d);
-            }
-        }
-        accountService.updateOuterAccs();
     }
 }

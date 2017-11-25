@@ -63,8 +63,6 @@ function checkSelected() {
         ($('#inputAddDealBuyer').show());
     else
         ($('#inputAddDealBuyer').hide());
-    //if (accSellerNameId==accBuyerNameId) alert('aaaa');//$('#addDealSeller').val();
-    //$('#addDealBuyer')
 }
 
 function populateAccountOptions(allInnerAccounts) {
@@ -124,7 +122,7 @@ function getDataForEditingAcc(id) {
             });
         },
         error: function (xhr) {
-            alert(xhr.body);
+            showErrorDialog(xhr.body);
         }
     });
 }
@@ -297,7 +295,6 @@ function AccountForUpdate(id, name, deposit, description, isOuter) {
 function sendAccountToServerForCreate(acc) {
     var operationResult;
     var allInnerAccounts = [];
-    alert(acc.isOuter);
     $.ajax({
         type: 'post',
         contentType: 'application/json',
