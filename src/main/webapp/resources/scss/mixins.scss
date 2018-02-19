@@ -1,0 +1,9 @@
+@mixin onBtnPress($top, $left) {
+  &:active {
+    position: relative;
+    top: $top;
+    left: $left;
+    text-shadow: none;
+    box-shadow: none !important;
+  }
+}

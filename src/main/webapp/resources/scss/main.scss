@@ -1,0 +1,192 @@
+@import "constants";
+@import "mixins";
+
+body {
+  background-color: transparent;
+}
+
+header {
+  background-color: $headerBackgroundColor;
+  overflow: auto;
+  position: relative;
+  z-index: 5;
+  box-shadow: 0 10px 10px $headerShadow;
+  img {
+    padding-top: $headerPadding;
+    float: left;
+    padding-bottom: $headerPadding;
+    width: $headerImgParams;
+    height: $headerImgParams;
+  }
+  .mainMenu {
+    padding-top: $headerPadding;
+  }
+}
+
+.menu {
+  float: right;
+  a {
+    display: inline-block;
+    padding: $headerPadding;
+    text-decoration: none;
+    font-size: x-large;
+    color: $headerTextColor;
+  }
+}
+
+.mainMenu a {
+  text-shadow: 3px 3px 3px black;
+  &:hover {
+    border-bottom: 2px solid $headerTextColor;
+    text-shadow: 3px 3px 5px black;
+  }
+  @include onBtnPress(2px, 2px);
+  &:active {
+    padding-bottom: $headerPadding*0.9;
+  }
+}
+
+.mainMenu {
+  margin-top: $headerTextMargin/2;
+  float: left;
+}
+
+.logInMenu nav {
+  float: right;
+  a {
+    background: black;
+    box-shadow: 5px 5px 5px $headerLogShadow;
+    margin-left: $headerTextMargin/4;
+    &:active {
+      padding-bottom: $headerPadding+2;
+      box-shadow: none !important;
+    }
+    &:hover {
+      box-shadow: 5px 5px 5px darken($headerLogShadow, 10%);
+    }
+  }
+}
+
+.flex {
+  display: flex;
+  width: 100%;
+  height: $headerHeight*0.95;
+  justify-content: center;
+}
+
+.headerCenterBlock {
+  text-align: center;
+  flex-basis: 75%;
+  align-self: center;
+  h1 {
+    font-size: 500%;
+    font-weight: bold;
+    padding: $headerPadding*2;
+    color: black;
+    background: rgba(255, 255, 255, 0.5);
+  }
+  #joinButton {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 5px 5px 5px black;
+    padding: $headerPadding;
+    display: inline-block;
+    font-size: xx-large;
+    @include onBtnPress(5px, 5px);
+  }
+}
+
+.middleContainer {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.slider {
+  position: relative;
+  background: url("../img/mainImg.jpg") center fixed no-repeat;
+  width: 100%;
+}
+
+footer a {
+  text-decoration: none;
+  flex-basis: 10%;
+  font-size: larger;
+  text-align: center;
+  padding: $headerPadding $headerPadding/4 $headerPadding/4 0;
+}
+
+footer {
+  overflow: auto;
+  position: relative;
+  bottom: 0;
+  background: black;
+  margin-top: $headerTextMargin;
+  padding-bottom: $headerPadding;
+  span {
+    font-size: larger;
+  }
+  .rights {
+    float: right;
+  }
+}
+
+footer nav {
+  display: flex;
+  justify-content: center;
+}
+
+.transparentBack {
+  background: rgba(250, 250, 250, 0.6);
+  margin-bottom: $headerTextMargin*10;
+}
+
+#accountsTable {
+  margin-top: $headerTextMargin;
+  padding: $headerPadding;
+}
+
+table.dataTable {
+  border-top: 1px black solid;
+  margin-top: $headerPadding !important;
+  tbody {
+    tr {
+      background: transparent !important;
+    }
+    td {
+      vertical-align: middle;
+      font-size: larger;
+      padding: $headerPadding !important;
+    }
+  }
+}
+
+#tableWithAccs {
+  .btn {
+    margin: $headerPadding/3;
+    width: 40px;
+    height: 40px;
+  }
+  tbody {
+    border-bottom: none !important;
+  }
+}
+
+#tableWithAccs_info, #tableWithAccs_paginate, #tableWithAccs_length {
+  display: none !important;
+}
+
+#tableWithAccs_filter {
+  padding: $headerPadding;
+  input {
+    border-radius: 10px;
+    font-size: x-large;
+    border: none;
+  }
+}
+
+#statistic {
+  height: 100%;
+}

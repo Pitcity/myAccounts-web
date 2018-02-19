@@ -1,0 +1,159 @@
+body {
+  background-color: transparent; }
+
+header {
+  background-color: #5a5a5a;
+  overflow: auto;
+  position: relative;
+  z-index: 5;
+  box-shadow: 0 10px 10px transparent; }
+  header img {
+    padding-top: 15px;
+    float: left;
+    padding-bottom: 15px;
+    width: 100px;
+    height: 100px; }
+  header .mainMenu {
+    padding-top: 15px; }
+
+.menu {
+  float: right; }
+  .menu a {
+    display: inline-block;
+    padding: 15px;
+    text-decoration: none;
+    font-size: x-large;
+    color: white; }
+
+.mainMenu a {
+  text-shadow: 3px 3px 3px black; }
+  .mainMenu a:hover {
+    border-bottom: 2px solid white;
+    text-shadow: 3px 3px 5px black; }
+  .mainMenu a:active {
+    position: relative;
+    top: 2px;
+    left: 2px;
+    text-shadow: none;
+    box-shadow: none !important; }
+  .mainMenu a:active {
+    padding-bottom: 13.5px; }
+
+.mainMenu {
+  margin-top: 10px;
+  float: left; }
+
+.logInMenu nav {
+  float: right; }
+  .logInMenu nav a {
+    background: black;
+    box-shadow: 5px 5px 5px #404040;
+    margin-left: 5px; }
+    .logInMenu nav a:active {
+      padding-bottom: 17px;
+      box-shadow: none !important; }
+    .logInMenu nav a:hover {
+      box-shadow: 5px 5px 5px #272727; }
+
+.flex {
+  display: flex;
+  width: 100%;
+  height: 95%;
+  justify-content: center; }
+
+.headerCenterBlock {
+  text-align: center;
+  flex-basis: 75%;
+  align-self: center; }
+  .headerCenterBlock h1 {
+    font-size: 500%;
+    font-weight: bold;
+    padding: 30px;
+    color: black;
+    background: rgba(255, 255, 255, 0.5); }
+  .headerCenterBlock #joinButton {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 5px 5px 5px black;
+    padding: 15px;
+    display: inline-block;
+    font-size: xx-large; }
+    .headerCenterBlock #joinButton:active {
+      position: relative;
+      top: 5px;
+      left: 5px;
+      text-shadow: none;
+      box-shadow: none !important; }
+
+.middleContainer {
+  width: 80%;
+  margin: 0 auto; }
+
+.slider {
+  position: relative;
+  background: url("../img/mainImg.jpg") center fixed no-repeat;
+  width: 100%; }
+
+footer a {
+  text-decoration: none;
+  flex-basis: 10%;
+  font-size: larger;
+  text-align: center;
+  padding: 15px 3.75px 3.75px 0; }
+
+footer {
+  overflow: auto;
+  position: relative;
+  bottom: 0;
+  background: black;
+  margin-top: 20px;
+  padding-bottom: 15px; }
+  footer span {
+    font-size: larger; }
+  footer .rights {
+    float: right; }
+
+footer nav {
+  display: flex;
+  justify-content: center; }
+
+.transparentBack {
+  background: rgba(250, 250, 250, 0.6);
+  margin-bottom: 200px; }
+
+#accountsTable {
+  margin-top: 20px;
+  padding: 15px; }
+
+table.dataTable {
+  border-top: 1px black solid;
+  margin-top: 15px !important; }
+  table.dataTable tbody tr {
+    background: transparent !important; }
+  table.dataTable tbody td {
+    vertical-align: middle;
+    font-size: larger;
+    padding: 15px !important; }
+
+#tableWithAccs .btn {
+  margin: 5px;
+  width: 40px;
+  height: 40px; }
+#tableWithAccs tbody {
+  border-bottom: none !important; }
+
+#tableWithAccs_info, #tableWithAccs_paginate, #tableWithAccs_length {
+  display: none !important; }
+
+#tableWithAccs_filter {
+  padding: 15px; }
+  #tableWithAccs_filter input {
+    border-radius: 10px;
+    font-size: x-large;
+    border: none; }
+
+#statistic {
+  height: 100%; }
