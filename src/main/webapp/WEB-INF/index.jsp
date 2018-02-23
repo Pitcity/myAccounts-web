@@ -33,7 +33,7 @@
         <div class="flex">
             <div class="headerCenterBlock">
                 <h1>It is time to control your money</h1>
-                <div id="joinButton">Join now!</div>
+                <a href="register.jsp"><div id="joinButton">Join now!</div></a>
             </div>
         </div>
     </div>
