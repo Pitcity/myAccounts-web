@@ -5,31 +5,19 @@
 <html>
 <head>
     <title>MyAccounts-Web</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"-->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 </head>
 
 <body class="slider">
 <header class="slider">
     <div class="middleContainer">
-        <a href="#"><img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="logo"></a>
-        <div class="menu mainMenu">
-            <nav>
-                <a href="#accountsTable">Accounts</a>
-                <a href="#" id="addAccBtn">Add Account</a>
-                <a href="#" id="addDealBtn">Add Deal</a>
-                <a href="#statistic">Statistic</a>
-            </nav>
-        </div>
-        <div class="menu logInMenu">
-            <nav>
-                <a href="#" class="notLoggedIn">Log In</a>
-                <a href="#" class="notLoggedIn">Sing In</a>
-                <a href="#" class="loggedIn">Log Out</a>
-            </nav>
-        </div>
+        <c:import url="parts/header.jsp"></c:import>
         <div class="flex">
             <div class="headerCenterBlock">
                 <h1>It is time to control your money</h1>
@@ -38,6 +26,7 @@
         </div>
     </div>
 </header>
+
 <main>
 
     <section id="accountsTable" class="transparentBack">
@@ -164,17 +153,7 @@
     </div>
 </main>
 
-<footer>
-    <div class="middleContainer">
-        <nav>
-            <a href="#">Table</a>
-            <a href="#">Add Account</a>
-            <a href="#">Add Deal</a>
-            <a href="#">Statistic</a>
-        </nav>
-        <span class="rights">All rights reserved @itovp 2018</span>
-    </div>
-</footer>
+<c:import url="parts/footer.jsp"></c:import>
 </body>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -183,6 +162,9 @@
 <script src="${pageContext.request.contextPath}/resources/js/messages.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/validation.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/mainPage.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/mainPage.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/lib/jquery-3.1.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/lib/jquery-ui.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/lib/jquery.validate.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/lib/jquery.dataTables.min.js"></script>
 
 </html>

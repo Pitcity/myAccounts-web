@@ -34,7 +34,7 @@ public class AccountController {
     @RequestMapping(value = "/")
     public String home() {
         System.out.println("Controller: Passing address..");
-        return "/WEB-INF/index.jsp";
+        return "/index";
     }
 
     @RequestMapping(value = "addAcc", method = RequestMethod.POST)
