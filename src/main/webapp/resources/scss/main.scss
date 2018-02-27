@@ -70,7 +70,6 @@ header {
 .flex {
   display: flex;
   width: 100%;
-  height: $headerHeight*0.95;
   justify-content: center;
 }
 
@@ -102,6 +101,13 @@ header {
 .middleContainer {
   width: 80%;
   margin: 0 auto;
+  .flex {
+    height: $headerHeight*0.95;
+  }
+}
+
+.form-row {
+  padding-bottom: $headerPadding;
 }
 
 .slider {

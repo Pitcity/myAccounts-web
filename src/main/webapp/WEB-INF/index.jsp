@@ -5,13 +5,13 @@
 <html>
 <head>
     <title>MyAccounts-Web</title>
-    <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"-->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
 </head>
 
 <body class="slider">
@@ -21,7 +21,7 @@
         <div class="flex">
             <div class="headerCenterBlock">
                 <h1>It is time to control your money</h1>
-                <a href="register.jsp"><div id="joinButton">Join now!</div></a>
+                <a href="<c:url value="/registration"/>"><div id="joinButton">Join now!</div></a>
             </div>
         </div>
     </div>
@@ -155,6 +155,10 @@
 
 <c:import url="parts/footer.jsp"></c:import>
 </body>
+<script src="${pageContext.request.contextPath}/resources/js/lib/jquery-3.1.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/lib/jquery-ui.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/lib/jquery.validate.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/lib/jquery.dataTables.min.js"></script>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
@@ -162,9 +166,5 @@
 <script src="${pageContext.request.contextPath}/resources/js/messages.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/validation.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/mainPage.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/lib/jquery-3.1.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/lib/jquery-ui.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/lib/jquery.validate.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/lib/jquery.dataTables.min.js"></script>
 
 </html>

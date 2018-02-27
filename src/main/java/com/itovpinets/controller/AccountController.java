@@ -33,8 +33,14 @@ public class AccountController {
 
     @RequestMapping(value = "/")
     public String home() {
-        System.out.println("Controller: Passing address..");
+        System.out.println("Controller: Passing address.. home");
         return "/index";
+    }
+
+    @RequestMapping(value = "/registration")
+    public String register() {
+        System.out.println("Controller: Passing address.. registration");
+        return "/pages/register";
     }
 
     @RequestMapping(value = "addAcc", method = RequestMethod.POST)
