@@ -1,9 +1,7 @@
 package com.itovpinets.controller;
 
 import com.google.gson.Gson;
-import com.itovpinets.dto.AccountDto;
 import com.itovpinets.dto.DealDto;
-import com.itovpinets.entity.Account;
 import com.itovpinets.entity.Deal;
 import com.itovpinets.repository.AccountRepo;
 import com.itovpinets.repository.DealRepo;
@@ -12,13 +10,10 @@ import com.itovpinets.service.DealService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.util.LinkedList;
 import java.util.List;
 
 /**

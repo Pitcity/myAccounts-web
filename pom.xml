@@ -33,12 +33,16 @@
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
+                <!--session-config>
+                    <session-timeout>15</session-timeout>
+                </session-config-->
                 <configuration>
                     <server>TomcatServer</server>
                     <path>/home</path>
                     <server>credserver</server>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
     <properties>
@@ -187,6 +191,7 @@
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
             <version>3.18.2-GA</version>
+
         </dependency>
         <!-- SERVLET JSP JSTL -->
         <dependency>
@@ -418,5 +423,12 @@
             <version>1.4.0.RELEASE</version>
         </dependency>
     </dependencies>
+    <repositories>
+        <repository>
+            <id>spring-milestone</id>
+            <name>Spring Milestone Repository</name>
+            <url>https://repo.spring.io/milestone</url>
+        </repository>
+    </repositories>
 </project>
 

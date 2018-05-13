@@ -1,0 +1,10 @@
+.loginForm {
+    width: 200px;!important;
+    position: absolute;
+    top: 0px;
+    right: 150px;
+    background: white;
+    padding: 10px;
+    z-index: 1000;!important;
+    border-bottom: 49px;
+}

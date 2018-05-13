@@ -1,26 +1,26 @@
 package com.itovpinets.config;
 
+import com.itovpinets.entity.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import javax.persistence.EntityManagerFactory;
-
+import java.util.ArrayList;
 
 @Configuration
 @EnableWebMvc
 @EnableJpaRepositories({"com.itovpinets.repository"})
 @ComponentScan({ "com.itovpinets" })
+@EnableWebSecurity
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 
     @Override
@@ -36,5 +36,13 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         viewResolver.setPrefix("/WEB-INF/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() throws Exception {
+        ArrayList users = new ArrayList();
+        users.add(new User());
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager(users);
+        return manager;
     }
 }

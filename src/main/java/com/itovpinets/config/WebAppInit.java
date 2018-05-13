@@ -21,7 +21,7 @@ public class WebAppInit extends
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return null;
+        return new Class[] { WebAppConfig.class };
     }
 
 }

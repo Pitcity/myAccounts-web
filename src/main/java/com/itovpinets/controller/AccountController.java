@@ -37,6 +37,12 @@ public class AccountController {
         return "/index";
     }
 
+    /*@RequestMapping(value = "/")
+    public String login() {
+        System.out.println("Controller: Passing address.. index");
+        return "/index";
+    }*/
+
     @RequestMapping(value = "/registration")
     public String register() {
         System.out.println("Controller: Passing address.. registration");
