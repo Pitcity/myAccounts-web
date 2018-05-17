@@ -3,20 +3,21 @@ package com.itovpinets.dto;
 import com.itovpinets.entity.Deal;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 /**
  * Created by IhorTovpinets on 15.12.2016.
  */
 public class DealDto {
 
-    private long id;
+    private String id = UUID.randomUUID().toString();
     private String buyer;
     private String seller;
     private String date;
     private String note;
     private BigDecimal sum;
 
-    public DealDto(long id, String buyer, String seller, String date, String note, BigDecimal sum) {
+    public DealDto(String id, String buyer, String seller, String date, String note, BigDecimal sum) {
         this.id = id;
         this.buyer = buyer;
         this.seller = seller;
@@ -38,11 +39,11 @@ public class DealDto {
         this.sum = deal.getSum();
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

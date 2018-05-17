@@ -18,21 +18,21 @@ import java.math.BigDecimal;
 
 @Repository
 @Transactional
-public interface AccountRepo extends JpaRepository<Account, Long> {
+public interface AccountRepo extends JpaRepository<Account, String> {
 
     @Modifying
     @Query("UPDATE Account a SET a.name=:name, a.description = :description WHERE a.id=:id")
-    void updateAccount(@Param("id") Long id, @Param("name") String name, @Param("description") String description) throws ConstraintViolationException;
+    void updateAccount(@Param("id") String id, @Param("name") String name, @Param("description") String description) throws ConstraintViolationException;
 
     @Query("SELECT a FROM Account a WHERE a.name=:name")
     Account findByName(@Param("name") String name) throws ConstraintViolationException;
 
     @Modifying
     @Query("UPDATE Account a SET a.isOuter=:isOuter WHERE a.id=:id")
-    void changeOuter(@Param("id") Long id, @Param("isOuter") boolean isOuter) throws ConstraintViolationException;
+    void changeOuter(@Param("id") String id, @Param("isOuter") boolean isOuter) throws ConstraintViolationException;
 
     @Modifying
     @Query("UPDATE Account a SET a.name=:name, a.description = :description, a.deposit = :deposit WHERE a.id=:id")
-    void updateAccountWithDeposit(@Param("id") Long id, @Param("name") String name, @Param("description") String description, @Param("deposit") BigDecimal deposit) throws ConstraintViolationException;
+    void updateAccountWithDeposit(@Param("id") String id, @Param("name") String name, @Param("description") String description, @Param("deposit") BigDecimal deposit) throws ConstraintViolationException;
 
 }

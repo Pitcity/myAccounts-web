@@ -360,17 +360,17 @@ function populateAccountList(allInnerAccounts) {
     $('#divForTableWithAccs').append(table);
 
     $('.deleteAcc').click(function () {
-        var res = this.id.substring(10, 20);
+        var res = this.id.substring(10, 50);
         deleteAcc(res);
     });
 
     $('.editAcc').click(function () {
-        var res = this.id.substring(8, 20);
+        var res = this.id.substring(8, 50);
         getDataForEditingAcc(res);
     });
 
     $('.dealsForAcc').click(function () {
-        var res = this.id.substring(12, 20);
+        var res = this.id.substring(12, 50);
         getDealsForAcc(res);
     });
 

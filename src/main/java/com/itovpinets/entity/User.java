@@ -1,32 +1,40 @@
 package com.itovpinets.entity;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Email;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.UUID;
 
 @Entity
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String userId;
 
-    private String userName = "testUser";
-    private String lastName = "testUser";
+    @Email
     private String email = "testUser";
     private String password = "testpassword";
     private boolean enabled = true;
-    private String role = "User";
+    private String role = "USER";
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        ArrayList arrList = new ArrayList<SimpleGrantedAuthority> ();
+        ArrayList arrList = new ArrayList<SimpleGrantedAuthority>();
         arrList.add(new SimpleGrantedAuthority(role));
         return arrList;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     @Override

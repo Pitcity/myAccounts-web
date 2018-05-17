@@ -1,10 +1,12 @@
 package com.itovpinets.entity;
 
 import com.itovpinets.dto.AccountDto;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 /**
  * Created by IhorTovpinets on 15.12.2016.
@@ -14,12 +16,16 @@ import java.math.BigDecimal;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
 
     @Column(unique = true)
     @NotNull
     private String name;
+
+    @ManyToOne
+    private User user;
 
     @NotNull
     private BigDecimal deposit;
@@ -33,9 +39,10 @@ public class Account {
         this.deposit = deposit;
         this.description = description;
         this.isOuter = false;
+        this.id = UUID.randomUUID().toString();
     }
 
-    public Account(Long id, String name, BigDecimal deposit, String description) {
+    public Account(String id, String name, BigDecimal deposit, String description) {
         this.name = name;
         this.deposit = deposit;
         this.description = description;
@@ -43,8 +50,12 @@ public class Account {
         this.id = id;
     }
 
+    /*
+    * Method for creating an outer account
+    * */
     public Account(String name) {
         this.setName(name);
+        this.setId(UUID.randomUUID().toString());
         this.setDeposit(new BigDecimal(0));
         this.setDescription("");
         this.setIsOuter(true);
@@ -53,6 +64,7 @@ public class Account {
     public Account(AccountDto accDto) {
         this.setDeposit(accDto.getDeposit());
         this.setName(accDto.getName());
+        this.setId(accDto.getId());
         this.setDescription(accDto.getDescription());
         this.setIsOuter(accDto.getIsOuter());
     }
@@ -60,7 +72,7 @@ public class Account {
     public Account() {
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -85,7 +97,7 @@ public class Account {
         return name;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -1,8 +1,11 @@
 package com.itovpinets.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 /**
  * Created by IhorTovpinets on 15.12.2016.
@@ -12,8 +15,9 @@ import java.math.BigDecimal;
 public class Deal implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
 
     @ManyToOne
     private Account buyer;
@@ -30,6 +34,7 @@ public class Deal implements Serializable {
         this.sum = sum;
         this.note = note;
         this.date = date;
+        this.id = UUID.randomUUID().toString();
     }
 
     public Deal() {
@@ -56,7 +61,7 @@ public class Deal implements Serializable {
         return note;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 }

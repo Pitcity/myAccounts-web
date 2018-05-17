@@ -36,7 +36,7 @@ public class DealController {
     AccountService accountService;
 
     @RequestMapping(value = "dealsFroAcc_{id}", method = RequestMethod.GET)
-    public ResponseEntity<String> listOfDealsForAcc(@PathVariable Long id) {
+    public ResponseEntity<String> listOfDealsForAcc(@PathVariable String id) {
         List<DealDto> listOfDeals = dealService.getDealsForAccount(accountRepo.findOne(id));
         if (listOfDeals.isEmpty())
             ResponseEntity.status(HttpStatus.BAD_REQUEST).body("there's no deals for this acc");
@@ -46,6 +46,8 @@ public class DealController {
     @RequestMapping(value = "addDeal", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> addDeal(@RequestBody DealDto dealDto) {
+        System.out.println("\n\n\n\n\n\nownDebugg: " + dealDto.toString());
+        System.out.println("\n\n\n\n\n\nownDebugg: " + dealDto.getId());
         Deal newDeal = dealService.createDeal(dealDto);
         if (newDeal != null) {
             dealRepo.save(newDeal);

@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 @Repository
-public interface DealRepo extends JpaRepository<Deal, Long> {
+public interface DealRepo extends JpaRepository<Deal, String> {
 
 
     /*@Query("SELECT d FROM Deal d WHERE d.buyer = :id OR d.seller = : id")

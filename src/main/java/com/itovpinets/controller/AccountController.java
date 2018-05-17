@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.PersistenceException;
+import java.security.Principal;
 
 /**
  * Created by IhorTovpinets on 15.12.2016.
@@ -51,16 +52,14 @@ public class AccountController {
 
     @RequestMapping(value = "addAcc", method = RequestMethod.POST)
     //@ResponseBody
-    public ResponseEntity<String> addAccount(@RequestBody AccountDto accDto, BindingResult bindingResult) {
-        //System.out.println(accDto.getIsOuter() + "\n\n\n\n\n\n\n ");
+    public ResponseEntity<String> addAccount(@RequestBody AccountDto accDto, BindingResult bindingResult, Principal principal) {
         if (!(accountService.findByName(accDto.getName()) == null)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Account already exsists");
         }
         //todo: if (accountValidator.validateAccount(accDto));
-        //System.out.println(accDto.getIsOuter() + "\n\n\n\n\n\n\n ");
         Account acc = new Account(accDto);
-        //System.out.println(acc.getIsOuter() + "\n\n\n\n\n\n\n ");
         accountRepo.save(acc);
+        principal.getName();
         //// TODO: 21.12.2016 accountRepo.findAllInner returns List
         return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(accountService.findAllInner()));
     }
@@ -72,7 +71,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "getEditAcc_{accid}")
-    public ResponseEntity<String> getEditAcc(@PathVariable Long accid) {
+    public ResponseEntity<String> getEditAcc(@PathVariable String accid) {
         return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(new AccountDto(accountRepo.findOne(accid))));
     }
 
@@ -87,7 +86,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "deleteAcc_{accid}")
-    public ResponseEntity<String> deleteAcc(@PathVariable Long accid) {
+    public ResponseEntity<String> deleteAcc(@PathVariable String accid) {
         Account acc = accountRepo.findOne(accid);
         dealService.updateDeals(acc);
         accountService.updateOuterAccs();

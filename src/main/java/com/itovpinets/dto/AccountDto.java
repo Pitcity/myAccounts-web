@@ -4,12 +4,13 @@ import com.itovpinets.entity.Account;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 /**
  * Created by IhorTovpinets on 15.12.2016.
  */
 public class AccountDto implements Serializable {
-    private Long id;
+    private String id = UUID.randomUUID().toString();
 
     private String name;
 
@@ -19,7 +20,7 @@ public class AccountDto implements Serializable {
 
     private boolean isOuter;
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -39,8 +40,7 @@ public class AccountDto implements Serializable {
         isOuter = outer;
     }
 
-    public Long getId() {
-
+    public String getId() {
         return id;
     }
 
