@@ -13,11 +13,11 @@ public class DealDto {
     private String id = UUID.randomUUID().toString();
     private String buyer;
     private String seller;
-    private String date;
+    private long date;
     private String note;
     private BigDecimal sum;
 
-    public DealDto(String id, String buyer, String seller, String date, String note, BigDecimal sum) {
+    public DealDto(String id, String buyer, String seller, long date, String note, BigDecimal sum) {
         this.id = id;
         this.buyer = buyer;
         this.seller = seller;
@@ -63,11 +63,11 @@ public class DealDto {
         this.seller = seller;
     }
 
-    public String getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(long date) {
         this.date = date;
     }
 

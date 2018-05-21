@@ -171,8 +171,8 @@ function createDeal() {
     sum = $('#addDealSum').val();
     note = $('#addDealNote').val();
     date = $('#addDealDate').val();
-    var deal = new Deal(buyer, seller, date, note, sum);
-    sendDealToServerForCreate(deal);//todo: all the date as date, not string
+    var deal = new Deal(buyer, seller, new Date(date).getTime(), note, sum);
+    sendDealToServerForCreate(deal);
 }
 
 function sendDealToServerForCreate(deal) {
@@ -332,7 +332,7 @@ function populateDealList(dealsForAccount, account) {
     dealsForAccount.forEach(function (item, i) {
         contentForTable += '<tr id=\'dealId_' + item.id + '\'><td>' + (i + 1) + '</td><td hidden>' + item.id + '</td><td>'
             + item.seller + '</td><td>' + item.buyer + '</td><td>' + item.sum +
-            '</td><td>' + item.date + '</td><td>' + item.note + '</td></tr>';//todo:check this
+            '</td><td>' + (new Date(item.date)).toLocaleDateString() + '</td><td>' + item.note + '</td></tr>';//todo:check this
     });
     var table = '<table id="tableWithDealsForAccount" class="table table-striped"><thead><th>id</th><th hidden>id</th>' +
         '<th>Seller</th><th>Buyer</th><th>Sum</th><th>Date</th><th>Note</th></thead><tbody>' + contentForTable + '</tbody></table>';

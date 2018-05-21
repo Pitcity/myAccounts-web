@@ -24,11 +24,11 @@ public class Deal implements Serializable {
 
     @ManyToOne
     private Account seller;
-    private String date;
+    private long date;
     private String note;
     private BigDecimal sum;
 
-    public Deal(Account buyer, Account seller, String note, BigDecimal sum, String date) {
+    public Deal(Account buyer, Account seller, String note, BigDecimal sum, long date) {
         this.buyer = buyer;
         this.seller = seller;
         this.sum = sum;
@@ -41,7 +41,7 @@ public class Deal implements Serializable {
 
     }
 
-    public String getDate() {
+    public long getDate() {
         return date;
     }
 

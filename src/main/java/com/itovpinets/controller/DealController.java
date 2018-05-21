@@ -46,8 +46,6 @@ public class DealController {
     @RequestMapping(value = "addDeal", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> addDeal(@RequestBody DealDto dealDto) {
-        System.out.println("\n\n\n\n\n\nownDebugg: " + dealDto.toString());
-        System.out.println("\n\n\n\n\n\nownDebugg: " + dealDto.getId());
         Deal newDeal = dealService.createDeal(dealDto);
         if (newDeal != null) {
             dealRepo.save(newDeal);
