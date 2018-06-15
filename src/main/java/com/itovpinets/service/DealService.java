@@ -29,21 +29,25 @@ public class DealService {
     AccountService accountService;
 
     public Deal createDeal(DealDto dealDto) {
-        Account seller = accountRepo.findByName(dealDto.getSeller());
-        Account buyer = accountRepo.findByName(dealDto.getBuyer());
+        Account seller = accountRepo.findOne(dealDto.getSellerId());
+        Account buyer = accountRepo.findOne(dealDto.getBuyerId());
         if (seller == null) {
-            accountRepo.save(new Account(dealDto.getSeller()));
             seller = accountRepo.findByName(dealDto.getSeller());
+            if (seller == null) {
+                accountRepo.save(new Account(dealDto.getSeller(), dealDto.getSellerId()));
+                seller = accountRepo.findOne(dealDto.getSellerId());
+            }
         }
         if (buyer == null) {
-            accountRepo.save(new Account(dealDto.getBuyer()));
             buyer = accountRepo.findByName(dealDto.getBuyer());
+            if (buyer == null) {
+                accountRepo.save(new Account(dealDto.getBuyer(), dealDto.getBuyerId()));
+                buyer = accountRepo.findOne(dealDto.getBuyerId());
+            }
         }
 
         if (accountService.depositIsChanged(buyer, dealDto.getSum().multiply(BigDecimal.valueOf(-1))) &&
                 accountService.depositIsChanged(seller, dealDto.getSum())) {
-            seller = accountRepo.findByName(dealDto.getSeller());
-            buyer = accountRepo.findByName(dealDto.getBuyer());
             return new Deal(buyer, seller, dealDto.getNote(), dealDto.getSum(), dealDto.getDate());
         }
         return null;
@@ -61,7 +65,7 @@ public class DealService {
         return dealDto;
     }
 
-    public List<DealDto> getDtoList(List<Deal> listOfDeals) {
+    public List<DealDto> getDealsDtoList(List<Deal> listOfDeals) {
         List<DealDto> listOfDealsDto = new LinkedList<DealDto>();
         for (Deal d : listOfDeals) {
             listOfDealsDto.add(new DealDto(d));
@@ -73,7 +77,7 @@ public class DealService {
         List<Deal> dealList = dealRepo.findAll();
         List<DealDto> dealListDto = new LinkedList<>();
         for (Deal d : dealList) {
-            if (d.getBuyer().equals(account) || d.getSeller().equals(account)) {
+            if (account.equals(d.getBuyer()) || account.equals(d.getSeller())) {
                 dealListDto.add(new DealDto(d));
             }
         }

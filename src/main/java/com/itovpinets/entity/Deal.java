@@ -28,6 +28,11 @@ public class Deal implements Serializable {
     private String note;
     private BigDecimal sum;
 
+
+    /*
+     * todo in ideal variant through builder, and the method is private
+     * @see DealService.createDeal()
+      * */
     public Deal(Account buyer, Account seller, String note, BigDecimal sum, long date) {
         this.buyer = buyer;
         this.seller = seller;

@@ -11,8 +11,10 @@ import java.util.UUID;
 public class DealDto {
 
     private String id = UUID.randomUUID().toString();
-    private String buyer;
-    private String seller;
+    private String buyerId;
+    private String buyer; //name
+    private String sellerId;
+    private String seller; //name
     private long date;
     private String note;
     private BigDecimal sum;
@@ -33,7 +35,9 @@ public class DealDto {
     public DealDto(Deal deal) {
         this.id = deal.getId();
         this.buyer = deal.getBuyer().getName();
+        this.buyerId = deal.getBuyer().getId();
         this.seller = deal.getSeller().getName();
+        this.sellerId = deal.getSeller().getId();
         this.date = deal.getDate();
         this.note = deal.getNote();
         this.sum = deal.getSum();
@@ -41,6 +45,14 @@ public class DealDto {
 
     public String getId() {
         return id;
+    }
+
+    public String getSellerId() {
+        return sellerId;
+    }
+
+    public String getBuyerId() {
+        return buyerId;
     }
 
     public void setId(String id) {

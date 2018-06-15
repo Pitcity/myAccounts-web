@@ -38,12 +38,6 @@ public class AccountController {
         return "/index";
     }
 
-    /*@RequestMapping(value = "/")
-    public String login() {
-        System.out.println("Controller: Passing address.. index");
-        return "/index";
-    }*/
-
     @RequestMapping(value = "/registration")
     public String register() {
         System.out.println("Controller: Passing address.. registration");
@@ -68,6 +62,12 @@ public class AccountController {
     @ResponseBody
     public ResponseEntity<String> listOfAccounts() {
         return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(accountService.findAllInner()));
+    }
+
+    @RequestMapping(value = "getAccListAll", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> listOfAccountsAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(accountRepo.findAll()));
     }
 
     @RequestMapping(value = "getEditAcc_{accid}")

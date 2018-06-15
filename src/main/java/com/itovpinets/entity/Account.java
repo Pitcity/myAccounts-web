@@ -16,11 +16,9 @@ import java.util.UUID;
 public class Account {
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    @Column(unique = true)
+    @Column(unique = false)
     @NotNull
     private String name;
 
@@ -53,9 +51,9 @@ public class Account {
     /*
     * Method for creating an outer account
     * */
-    public Account(String name) {
+    public Account(String name, String id) {
         this.setName(name);
-        this.setId(UUID.randomUUID().toString());
+        this.setId(id);
         this.setDeposit(new BigDecimal(0));
         this.setDescription("");
         this.setIsOuter(true);

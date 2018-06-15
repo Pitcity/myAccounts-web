@@ -155,6 +155,15 @@ function createAccount() {
     sendAccountToServerForCreate(acc);
 }
 
+function guid() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+
 function createDeal() {
     var accSellerNameId = $('#addDealSeller').val();
     var accBuyerNameId = $('#addDealBuyer').val();
@@ -164,14 +173,19 @@ function createDeal() {
 
     seller = accSellerNameId == 'another' ? $('#inputAddDealSeller').val() :
         $('#addDealSeller').find('option[value=' + accSellerNameId + ']').html();
-
     buyer = accBuyerNameId == 'another' ? $('#inputAddDealBuyer').val() :
         $('#addDealBuyer').find('option[value=' + accBuyerNameId + ']').html();
 
     sum = $('#addDealSum').val();
     note = $('#addDealNote').val();
     date = $('#addDealDate').val();
-    var deal = new Deal(buyer, seller, new Date(date).getTime(), note, sum);
+    if (accBuyerNameId === 'another') {
+        accBuyerNameId = guid();
+    }
+    if (accSellerNameId === 'another') {
+        accSellerNameId = guid();
+    }
+    var deal = new Deal(buyer, accBuyerNameId, seller, accSellerNameId, new Date(date).getTime(), note, sum);
     sendDealToServerForCreate(deal);
 }
 
@@ -277,9 +291,11 @@ function Account(name, deposit, description, isOuter) {
     this.isOuter = isOuter;
 }
 
-function Deal(buyer, seller, date, note, sum) {
+function Deal(buyer, buyerId, seller, sellerId, date, note, sum) {
     this.buyer = buyer;
+    this.buyerId = buyerId;
     this.seller = seller;
+    this.sellerId = sellerId;
     this.date = date;
     this.note = note;
     this.sum = sum;

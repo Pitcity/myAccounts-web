@@ -43,6 +43,11 @@ public class DealController {
         return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(listOfDeals));
     }
 
+    @RequestMapping(value = "getDeals", method = RequestMethod.POST)
+    public ResponseEntity<String> listOfDealsForAcc() {
+        return  ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(dealRepo.findAll()));
+    }
+
     @RequestMapping(value = "addDeal", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> addDeal(@RequestBody DealDto dealDto) {
