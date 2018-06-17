@@ -260,6 +260,96 @@ function jsonToDealList(data) {
     return innerDealList;
 }
 
+function generateColor(i, max) {
+    collor = 255*((i+1)/(max+1));
+    return ("rgba("+ (collor/5)+","+(collor/5)+","+(collor + Math.random()* 255*i/max)+", 0.8");
+}
+
+function updateDeals(AccId) {
+    var path = "dealsFroAcc_" + AccId;
+    $.ajax({
+        type: 'get',
+        contentType: 'application/json',
+        url: path,
+        dataType: 'json',
+        success: function (data) {
+            var dealsForAcc = jsonToDealList(data);
+
+            var ctx = document.getElementById("myChart").getContext('2d');
+
+            var arrDealDate = new Array(31);
+            var arrDeposit = new Array(31);
+            var arrColors = new Array(31);
+            for (var i=0;i<31;i++) {
+                arrDealDate[i] = i+1;
+                arrDeposit[i] = 0;
+                arrColors[i] = 'rgba(255, 206, 86, 0)';
+            }
+            dealsForAcc.forEach(function (value) {
+                arrDealDate[new Date(value.date).getDate()] = (new Date(value.date).getDate());
+                arrDeposit[new Date(value.date).getDate()] += (value.sum);
+                arrColors[new Date(value.date).getDate()] = generateColor(0, dealsForAcc.length);
+            });
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: arrDealDate,
+                    datasets: [{
+                        data: arrDeposit,
+                        backgroundColor: arrColors,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        },
+        error: function (xhr) {
+            showErrorDialog(xhr.body);
+        }
+    });
+}
+function updateDonChart (allInnerAccounts) {
+    var ctx = document.getElementById("myChart1").getContext('2d');
+    var arrDepo = [];
+    var arrAccNames = [];
+    var arrColors = [];
+    allInnerAccounts.forEach(function (value, i) {
+        arrDepo[i] = (value.deposit);
+        arrAccNames[i] = (value.name);
+        arrColors[i] = generateColor(i, allInnerAccounts.length);
+    });
+    data = {
+        datasets: [{
+            data: arrDepo,
+            backgroundColor : arrColors
+        }],
+
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: arrAccNames
+    };
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: data,
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+}
+
 function showAccountList() {
     var allInnerAccounts = [];
     $.ajax({
@@ -271,6 +361,9 @@ function showAccountList() {
             allInnerAccounts = jsonToAccArray(data);
             populateAccountList(allInnerAccounts);
             $('#dialogForAditingAccount').hide();
+
+            updateDonChart(allInnerAccounts);
+            updateDeals(allInnerAccounts[0].id);
         },
         error: function (xhr) {
             showErrorDialog(xhr.responseText);
